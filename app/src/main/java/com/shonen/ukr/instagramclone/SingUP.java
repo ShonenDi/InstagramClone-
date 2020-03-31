@@ -6,17 +6,25 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import com.parse.FindCallback;
+import com.parse.GetCallback;
 import com.parse.ParseException;
 import com.parse.ParseObject;
+import com.parse.ParseQuery;
 import com.parse.SaveCallback;
 import com.shashank.sony.fancytoastlib.FancyToast;
+
+import java.util.List;
 
 public class SingUP extends AppCompatActivity {
 
     private EditText edtName, edtPunchPower, edtPunchSpeed, edtKickPower, edtKickSpeed;
-    private Button saveBtn;
+    private Button saveBtn, getAllDatabtn;
+    private TextView getDadaTxt, dataInfo;
+    private String allDataKickBoxers;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,6 +37,50 @@ public class SingUP extends AppCompatActivity {
         edtKickPower = findViewById(R.id.edtKickPower);
         edtKickSpeed = findViewById(R.id.edtKickSpeed);
         saveBtn = findViewById(R.id.saveBtn);
+        getAllDatabtn = findViewById(R.id.getAllDatabtn);
+        getDadaTxt = findViewById(R.id.getDataTxt);
+        dataInfo = findViewById(R.id.dataInfo);
+        allDataKickBoxers = "";
+
+        getAllDatabtn.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                ParseQuery<ParseObject> allQuary = ParseQuery.getQuery("KickBoxer");
+                allQuary.findInBackground(new FindCallback<ParseObject>() {
+                    @Override
+                    public void done(List<ParseObject> objects, ParseException e) {
+                        if (e == null) {
+                            if (objects.size() > 0) {
+                                FancyToast.makeText(SingUP.this, "Success", FancyToast.LENGTH_LONG, FancyToast.SUCCESS, false).show();
+                                for (ParseObject kickBoxers : objects) {
+                                    allDataKickBoxers = allDataKickBoxers + kickBoxers.get("name") + " " + "Punch Power: " + kickBoxers.get("punchPower") + " "
+                                            + "Kick Power: " + kickBoxers.get("kickPower") + "\n";
+                                }
+                                dataInfo.setText(allDataKickBoxers);
+                                dataInfo.setVisibility(View.VISIBLE);
+                            }
+                        }
+                    }
+                });
+            }
+        });
+
+        getDadaTxt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ParseQuery<ParseObject> parseQuery = ParseQuery.getQuery("KickBoxer");
+                parseQuery.getInBackground("ySO8EfdBXY", new GetCallback<ParseObject>() {
+                    @Override
+                    public void done(ParseObject object, ParseException e) {
+                        if (object != null && e == null) {
+                            getDadaTxt.setText(object.get("name") + " - " + "Punch Power: " + object.get("punchPower"));
+                        }
+                    }
+                });
+            }
+        });
+
 
         saveBtn.setOnClickListener(new View.OnClickListener() {
             @Override
