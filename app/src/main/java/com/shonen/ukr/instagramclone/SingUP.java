@@ -2,12 +2,12 @@ package com.shonen.ukr.instagramclone;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.parse.FindCallback;
 import com.parse.GetCallback;
@@ -22,7 +22,7 @@ import java.util.List;
 public class SingUP extends AppCompatActivity {
 
     private EditText edtName, edtPunchPower, edtPunchSpeed, edtKickPower, edtKickSpeed;
-    private Button saveBtn, getAllDatabtn;
+    private Button saveBtn, getAllDataBtn,btnTransition ;
     private TextView getDadaTxt, dataInfo;
     private String allDataKickBoxers;
 
@@ -37,16 +37,18 @@ public class SingUP extends AppCompatActivity {
         edtKickPower = findViewById(R.id.edtKickPower);
         edtKickSpeed = findViewById(R.id.edtKickSpeed);
         saveBtn = findViewById(R.id.saveBtn);
-        getAllDatabtn = findViewById(R.id.getAllDatabtn);
+        getAllDataBtn = findViewById(R.id.getAllDatabtn);
         getDadaTxt = findViewById(R.id.getDataTxt);
         dataInfo = findViewById(R.id.dataInfo);
+        btnTransition = findViewById(R.id.statrActivityBtn);
         allDataKickBoxers = "";
 
-        getAllDatabtn.setOnClickListener(new View.OnClickListener() {
+        getAllDataBtn.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
                 ParseQuery<ParseObject> allQuary = ParseQuery.getQuery("KickBoxer");
+                allQuary.whereGreaterThan("punchPower",100);
                 allQuary.findInBackground(new FindCallback<ParseObject>() {
                     @Override
                     public void done(List<ParseObject> objects, ParseException e) {
@@ -109,6 +111,14 @@ public class SingUP extends AppCompatActivity {
                     FancyToast.makeText(SingUP.this, e.getMessage(), FancyToast.LENGTH_LONG, FancyToast.ERROR, true).show();
 
                 }
+            }
+        });
+
+        btnTransition.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(SingUP.this,SinUpLoginActivity.class);
+                startActivity(intent);
             }
         });
     }
