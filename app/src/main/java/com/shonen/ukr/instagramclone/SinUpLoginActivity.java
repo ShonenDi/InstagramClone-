@@ -1,6 +1,8 @@
 package com.shonen.ukr.instagramclone;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -43,10 +45,12 @@ public class SinUpLoginActivity extends AppCompatActivity {
                     @Override
                     public void done(ParseException e) {
                         if (e == null) {
-                            FancyToast.makeText(SinUpLoginActivity.this, addUser.get("username")+" is singed up successfully", FancyToast.LENGTH_LONG, FancyToast.SUCCESS, false).show();
-
-                        }
-                        else{
+                            FancyToast.makeText(SinUpLoginActivity.this, addUser.get("username") + " is singed up successfully",
+                                    FancyToast.LENGTH_LONG, FancyToast.SUCCESS, false).show();
+//                            .setGravity(Gravity.TOP|Gravity.LEFT, 0, 0);
+                            Intent intent = new Intent(SinUpLoginActivity.this, WelcomeActivity.class);
+                            startActivity(intent);
+                        } else {
                             FancyToast.makeText(SinUpLoginActivity.this, e.getMessage(), FancyToast.LENGTH_LONG, FancyToast.ERROR, true).show();
                         }
                     }
@@ -60,8 +64,10 @@ public class SinUpLoginActivity extends AppCompatActivity {
                 ParseUser.logInInBackground(edtUserNameLI.getText().toString(), edtPasswordLI.getText().toString(), new LogInCallback() {
                     @Override
                     public void done(ParseUser user, ParseException e) {
-                        if(user != null && e == null){
-                            FancyToast.makeText(SinUpLoginActivity.this, user.get("username")+" is logged in successfully", FancyToast.LENGTH_LONG, FancyToast.SUCCESS, false).show();
+                        if (user != null && e == null) {
+                            FancyToast.makeText(SinUpLoginActivity.this, user.get("username") + " is logged in successfully", FancyToast.LENGTH_LONG, FancyToast.SUCCESS, false).show();
+                            Intent intent = new Intent(SinUpLoginActivity.this, WelcomeActivity.class);
+                            startActivity(intent);
                         } else {
                             FancyToast.makeText(SinUpLoginActivity.this, e.getMessage(), FancyToast.LENGTH_LONG, FancyToast.ERROR, true).show();
                         }
