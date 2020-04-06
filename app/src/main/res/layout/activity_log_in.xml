@@ -2,15 +2,13 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/sinUpConst"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#F0F4511E"
-    android:fillViewport="true"
-    tools:context=".SingUP">
+    android:background="#E33F7B"
+    tools:context=".LogIn">
 
     <ImageView
-        android:id="@+id/instagralLogo"
+        android:id="@+id/instagralLogo4"
         android:layout_width="150dp"
         android:layout_height="150dp"
         android:layout_marginStart="8dp"
@@ -22,7 +20,7 @@
         app:srcCompat="@drawable/image" />
 
     <EditText
-        android:id="@+id/edtSingUpEmail"
+        android:id="@+id/edtLogInEmail"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -33,27 +31,12 @@
         android:inputType="textEmailAddress"
         android:textColorHint="#FFFFFF"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/instagralLogo" />
-
-    <EditText
-        android:id="@+id/edtSingUpUserName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="8dp"
-        android:ems="10"
-        android:hint="Please enter an username"
-        android:inputType="textPersonName|text|textEmailAddress"
-        android:textColorHint="#FFFFFF"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edtSingUpEmail" />
+        app:layout_constraintTop_toBottomOf="@+id/instagralLogo4" />
 
     <EditText
-        android:id="@+id/edtSingUpPassword"
+        android:id="@+id/edtLogInPassword"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -61,41 +44,42 @@
         android:layout_marginEnd="8dp"
         android:ems="10"
         android:hint="Please enter a password"
-        android:inputType="none|textPassword"
+        android:inputType="textPersonName"
         android:textColorHint="#FFFFFF"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edtSingUpUserName" />
+        app:layout_constraintTop_toBottomOf="@+id/edtLogInEmail" />
 
     <Button
-        android:id="@+id/btnSingUp"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="32dp"
-        android:layout_marginEnd="8dp"
-        android:background="#1E56E5"
-        android:text="Sing Up"
-        android:textColor="#FFFFFF"
-        android:textSize="24sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edtSingUpPassword" />
-
-    <Button
-        android:id="@+id/btnLogIn"
+        android:id="@+id/btnSinUpFromLO"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="8dp"
-        android:background="#54DF51"
+        android:background="#ED652B"
+        android:text="Sing Up"
+        android:textColor="#FFFFFF"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnLogInInActivity" />
+
+    <Button
+        android:id="@+id/btnLogInInActivity"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="8dp"
+        android:background="#FFB300"
         android:text="Log In"
         android:textColor="#FFFFFF"
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnSingUp" />
-
+        app:layout_constraintTop_toBottomOf="@+id/edtLogInPassword" />
 </androidx.constraintlayout.widget.ConstraintLayout>
