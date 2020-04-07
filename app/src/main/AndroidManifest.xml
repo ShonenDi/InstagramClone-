@@ -13,8 +13,6 @@
         <activity
             android:name=".LogIn"
             android:label="Log In"></activity>
-        <activity android:name=".WelcomeActivity" />
-        <activity android:name=".SinUpLoginActivity" />
         <activity
             android:name=".SingUP"
             android:label="Sing Up">
