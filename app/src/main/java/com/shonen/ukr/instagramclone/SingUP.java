@@ -49,6 +49,10 @@ public class SingUP extends AppCompatActivity implements View.OnClickListener {
                 return false;
             }
         });
+        if (ParseUser.getCurrentUser() != null) {
+//            ParseUser.getCurrentUser().logOut();
+            transitionToSocialMediaActivity();
+        }
         btnSingUp.setOnClickListener(this);
         btnLogIn.setOnClickListener(this);
 
@@ -74,6 +78,7 @@ public class SingUP extends AppCompatActivity implements View.OnClickListener {
                             public void done(ParseException e) {
                                 if (e == null) {
                                     FancyToast.makeText(SingUP.this, addNewUser.getUsername() + " was added", Toast.LENGTH_SHORT, FancyToast.SUCCESS, false).show();
+                                    transitionToSocialMediaActivity();
                                 } else {
                                     FancyToast.makeText(SingUP.this, e.getMessage(), FancyToast.LENGTH_LONG, FancyToast.ERROR, false).show();
                                 }
@@ -100,5 +105,9 @@ public class SingUP extends AppCompatActivity implements View.OnClickListener {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+    private void transitionToSocialMediaActivity(){
+        Intent intent=new Intent(SingUP.this,SocialMediaActivity.class);
+        startActivity(intent);
     }
 }

@@ -10,9 +10,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".SocialMediaActivity"></activity>
         <activity
             android:name=".LogIn"
-            android:label="Log In"></activity>
+            android:label="Log In" />
         <activity
             android:name=".SingUP"
             android:label="Sing Up">
