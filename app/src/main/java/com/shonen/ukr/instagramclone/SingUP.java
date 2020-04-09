@@ -34,6 +34,9 @@ public class SingUP extends AppCompatActivity implements View.OnClickListener {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sing_up);
+
+        setTitle("Sing Up");
+
         edtSingUpEmail = findViewById(R.id.edtSingUpEmail);
         edtSingUpUsername = findViewById(R.id.edtSingUpUserName);
         edtSingUpPassword = findViewById(R.id.edtSingUpPassword);
