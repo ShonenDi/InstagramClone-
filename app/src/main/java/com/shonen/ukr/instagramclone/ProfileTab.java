@@ -1,15 +1,14 @@
 package com.shonen.ukr.instagramclone;
 
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import androidx.fragment.app.Fragment;
 
 import com.parse.ParseException;
 import com.parse.ParseUser;
@@ -42,8 +41,14 @@ public class ProfileTab extends Fragment {
         edtFavoriteSport = view.findViewById(R.id.edtSport);
 
         final ParseUser parseUser = ParseUser.getCurrentUser();
-        if (parseUser.get("profileName") != null && parseUser.get("profileBio") != null && parseUser.get("profileProfession") != null
-                && parseUser.get("profileHobbies") != null && parseUser.get("profileFavoriteSport") != null) {
+        if (parseUser.get("profileName") == null && parseUser.get("profileBio") == null && parseUser.get("profileProfession") == null
+                && parseUser.get("profileHobbies") == null && parseUser.get("profileFavoriteSport") == null) {
+            edtProfileName.setText("");
+            edtBio.setText("");
+            edtProfession.setText("");
+            edtHobbies.setText("");
+            edtFavoriteSport.setText("");
+        }else {
             edtProfileName.setText(parseUser.get("profileName").toString());
             edtBio.setText(parseUser.get("profileBio").toString());
             edtProfession.setText(parseUser.get("profileProfession").toString());
