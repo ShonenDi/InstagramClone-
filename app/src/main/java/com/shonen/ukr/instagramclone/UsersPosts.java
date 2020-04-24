@@ -26,11 +26,13 @@ import com.shashank.sony.fancytoastlib.FancyToast;
 import java.util.List;
 
 public class UsersPosts extends AppCompatActivity {
+    private LinearLayout linearLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_users_posts);
+        linearLayout = findViewById(R.id.linearLayout);
 
 
         Intent receiveIntentObject = getIntent();
@@ -43,7 +45,7 @@ public class UsersPosts extends AppCompatActivity {
         parseQuery.whereEqualTo("username", receiveUsername);
         parseQuery.orderByDescending("createdAt");
 
-        ProgressDialog dialog = new ProgressDialog(this);
+        final ProgressDialog dialog = new ProgressDialog(this);
         dialog.setMessage("Loading...");
         dialog.show();
 
@@ -60,28 +62,35 @@ public class UsersPosts extends AppCompatActivity {
                             @Override
                             public void done(byte[] data, ParseException e) {
                                 if (data != null && e == null) {
-                                    Bitmap bitmap = BitmapFactory.decodeByteArray(data,0,data.length);
+                                    Bitmap bitmap = BitmapFactory.decodeByteArray(data, 0, data.length);
                                     ImageView postImageView = new ImageView(UsersPosts.this);
-                                    LinearLayout.LayoutParams imageViewParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,ViewGroup.LayoutParams.WRAP_CONTENT);
-                                    imageViewParams.setMargins(5,5,5,5);
+                                    LinearLayout.LayoutParams imageViewParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+                                    imageViewParams.setMargins(5, 5, 5, 5);
                                     postImageView.setLayoutParams(imageViewParams);
                                     postImageView.setScaleType(ImageView.ScaleType.FIT_CENTER);
                                     postImageView.setImageBitmap(bitmap);
 
-                                    LinearLayout.LayoutParams desParam = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,ViewGroup.LayoutParams.WRAP_CONTENT);
-                                    desParam.setMargins(5,5,5,5);
+                                    LinearLayout.LayoutParams desParam = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+                                    desParam.setMargins(5, 5, 5, 5);
                                     postDescription.setLayoutParams(desParam);
                                     postDescription.setGravity(Gravity.CENTER);
                                     postDescription.setBackgroundColor(Color.BLUE);
                                     postDescription.setTextColor(Color.WHITE);
                                     postDescription.setTextSize(30f);
 
-                                    LinearLayout linearLayout = findViewById(R.id.linearLayout);
+                                    linearLayout.addView(postImageView);
+                                    linearLayout.addView(postDescription);
+
+
                                 }
                             }
                         });
                     }
+                }else {
+                    FancyToast.makeText(UsersPosts.this, receiveUsername +  " doesn't have any posts",Toast.LENGTH_SHORT,FancyToast.INFO,false).show();
+                    finish();
                 }
+                dialog.dismiss();
             }
         });
     }
